@@ -1,3 +1,7 @@
+"""
+This file uses Q learning to train an agent how to play flappy-bird
+"""
+
 import numpy as np
 import collections
 import flappy_bird_gym
@@ -15,7 +19,7 @@ class QLearning:
         self.env = flappy_bird_gym.make("FlappyBird-v0")
         #self.env.observation_space.sample
 
-    def train(self, dumpInterval = 100, evalInterval = 100, epsilon = 0.2, lr = 0.8, decay = 0.8):
+    def train(self, dumpInterval = 100, evalInterval = 1000, epsilon = 0.2, lr = 0.8, decay = 0.8):
         """
         Several parameters we want to record:
         1. Max score the bird ever achieved during training
@@ -30,7 +34,6 @@ class QLearning:
         max_score = 0
         interval_score_sum = [0, 1] #default value
         total_score = 0
-        #previous_total_score = -999 #default value
         episodes = 0
         while episodes < self.MaxEposide: #and (interval_score_sum[-1] > interval_score_sum[-2]):
             obs = self.env.reset()
@@ -39,13 +42,12 @@ class QLearning:
             done = False
             
             prev_score = 0
-            if episodes % evalInterval == evalInterval-1:
+            if episodes % evalInterval == 0:
                 interval_score_sum.append(total_score)
                 # if total_score > previous_total_score:
                 #     previous_total_score = total_score
                 total_score = 0
-                print(episodes)
-                print(interval_score_sum)
+                print("Episodes trained " + str(episodes) + ". Current average score:" + str(interval_score_sum[-1] // evalInterval))
 
             while True: 
                 epsilon_decay = 0.99**(self.state_cnt[state]) #epslion_decay changed by state cnt
@@ -56,8 +58,6 @@ class QLearning:
                 else: 
                     action = np.argmax(self.Q[state])
                 
-                
-
                 next_obs, reward, done, info = self.env.step(action)
                 next_state = obs2state(next_obs)
                 score = info['score']
@@ -71,12 +71,6 @@ class QLearning:
                 if max_score < score: #record the max score achieved in single episode
                     max_score = score
                     episode_at_maximum = episodes
-                
-                """
-                if episodes % evalInterval == 0: #render every 10k episodes
-                    self.env.render()
-                    time.sleep(1/60)
-                """
                 
                 if done:
                     hit_dist = int(next_state.split('_')[1]) #high dist flag punishment
@@ -108,9 +102,6 @@ class QLearning:
         print(len(self.Q)) # The length of Q reflect the size of statespace the bird explored
         print('The maximum score is: ', max_score, 'at Itertaion: ', episode_at_maximum)
 
-        # if total_score > previous_total_score:
-        #     print(previous_total_score)
-        #     QLearning.dump_Q_json(self)
         self.env.close()
         return
     
@@ -137,10 +128,5 @@ class QLearning:
             np.save(f, score_sum)
 
 if __name__ == "__main__":
-    # with open("Q.json", "r") as f:
-    #     Q = json.load(f)
-    # state = "1656_-88_-9.0"
-    # print(Q[state])
-    # print(type(Q[state]))
     Q_learn = QLearning(4*10**5) #the recommended total training episodes
     Q_learn.train(10000,10000)

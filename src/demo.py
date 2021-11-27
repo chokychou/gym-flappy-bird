@@ -9,7 +9,7 @@ import math
 import json
 from utils.utils import *
 
-def test(Q, traject):
+def main(Q, traject):
     env = flappy_bird_gym.make("FlappyBird-cust-v0")
     
     obs = env.reset()
@@ -39,5 +39,7 @@ if __name__ == "__main__":
         Q = json.load(f)
     
     traject = []    
-    test(Q, traject)
+    main(Q, traject)
+    
+    print("The bird took the following trajectory.")
     print(traject)
