@@ -1,6 +1,6 @@
 # Gym-Flappy-Bird
 
-Foobar is a flappy-bird game bot trained using Q-learning.
+Gym-Flappy-Bird is a flappy-bird game bot trained using Q-learning.
 
 ## Installation
 
@@ -13,8 +13,11 @@ Simply clone this project.
 # run a demo
 python src/demo.py
 
-# training
-python src/train.py
+# training using epsilon-greedy
+python src/train_eg.py
+
+# training using UCB
+python src/train_ucb.py
 ```
 
 ## License
