@@ -20,5 +20,8 @@ python src/train_eg.py
 python src/train_ucb.py
 ```
 
+## Demo
+[Watch video](https://youtu.be/kEvhN9i-2w8)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
