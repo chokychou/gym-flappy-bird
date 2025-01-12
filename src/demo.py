@@ -1,8 +1,6 @@
 import numpy as np
 import collections
 
-from numpy.core.fromnumeric import argmax
-from numpy.lib.twodim_base import _trilu_indices_form_dispatcher
 import flappy_bird_gym
 import time
 import math

@@ -12,7 +12,7 @@ import sys
 import pygame
 from pygame.locals import *
 
-ASSETS_DIR = "./flappy_bird_gym/assets"
+ASSETS_DIR = "./src/flappy_bird_gym/assets"
 
 FPS = 30
 SCREEN_WIDTH = 288
