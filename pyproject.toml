@@ -1,0 +1,18 @@
+[project]
+name = "gym_flappy_bird"
+version = "0.0.1"
+authors = [
+  { name="chokychou", email="shenmeguislb@gmail.com" },
+]
+description = "Use RL to make an agent that plays flappy-bird"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/chokychou/gym-flappy-bird"
+Issues = "https://github.com/chokychou/gym-flappy-bird/issues"

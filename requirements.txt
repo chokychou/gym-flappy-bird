@@ -1,3 +1,1 @@
-numpy==1.23.5 
-gym
-pygame
+flappy-bird-gym2==0.0.7
